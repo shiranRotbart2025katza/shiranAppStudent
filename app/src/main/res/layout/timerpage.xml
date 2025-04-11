@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="#A9E9E3">
+
+
+
+    <!-- EditText להכניס את מספר השעות -->
+    <EditText
+        android:id="@+id/etHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="how many hours you would like to study?"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:padding="10dp" />
+
+    <!-- Button שמתחיל את הספירה לאחור -->
+    <Button
+        android:id="@+id/btnStartTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp" />
+
+    <!-- TextView להציג את הזמן שנשאר -->
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הזמן שנותר: 00:00"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:paddingTop="80dp"
+        android:id="@+id/cal"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:src="@drawable/timer"
+        />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="95dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="90dp"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:text="חזור"
+        />
+
+</LinearLayout>

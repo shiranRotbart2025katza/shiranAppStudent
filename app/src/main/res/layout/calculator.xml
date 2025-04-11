@@ -1,0 +1,163 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:background="#FFA4C2"
+ >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Calculator that solves        every problem:"
+        android:textSize="24sp"
+        android:padding="50dp"
+        />
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="24sp"
+        android:padding="16dp"
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="5"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:layout_columnWeight="1"
+            />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:layout_columnWeight="1"
+        />
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:layout_columnWeight="1"
+        />
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_columnWeight="1"
+        />
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:layout_columnWeight="1"
+        />
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="9"
+            android:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/btn0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/btnDivide"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:layout_columnWeight="1" />
+        <Button
+            android:id="@+id/btnPlus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:layout_columnWeight="1" />
+        <Button
+            android:id="@+id/btnMinus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_columnWeight="1" />
+        <Button
+            android:id="@+id/btnMulti"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:layout_columnWeight="1" />
+        <Button
+            android:id="@+id/btnEqual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="="
+            android:layout_columnWeight="1" />
+
+        <!-- המשך הוספת כפתורים בהתאם למחשבונך -->
+
+    </GridLayout>
+
+    <ImageView
+        android:id="@+id/clc"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:src="@drawable/calac"
+        android:paddingLeft="25dp"
+    />
+
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="95dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:text="חזור"
+        android:layout_marginBottom="30dp"
+        />
+
+</LinearLayout>

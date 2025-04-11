@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+
+    android:background="@drawable/notes">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="welcome to"
+     android:layout_marginLeft="45dp"
+        android:layout_marginTop="60dp"
+        android:textSize="50dp"
+        android:fontFamily="serif-monospace"
+        android:textColor="#464777"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="-The Student-"
+        android:textColor="#464777"
+        android:textSize="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="99dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="what do u want to do?"
+        android:textColor="#464777"
+        android:textSize="30dp" />
+
+
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="טיימר לזמן לימוד"
+
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="מחשבון" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="סודוקו לזמן משחק" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="נהג חדש" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="מוטיבציה :)" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/txtToSpeech"
+        android:layout_height="wrap_content"
+        android:text="הקראת העמוד"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:id="@+id/kid"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:src="@drawable/kid"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
