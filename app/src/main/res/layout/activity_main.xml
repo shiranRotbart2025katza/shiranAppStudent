@@ -7,89 +7,107 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
 
-    android:background="@drawable/notes">
-
+    android:background="@drawable/bcgrndd5">
 
     <TextView
+        android:layout_marginTop="80dp"
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="welcome to"
-     android:layout_marginLeft="45dp"
-        android:layout_marginTop="60dp"
-        android:textSize="50dp"
-        android:fontFamily="serif-monospace"
-        android:textColor="#464777"
-        />
+        android:text="שלום משתמש!"
+        android:textSize="16sp"
+        android:fontFamily="@font/rubik"
+        android:layout_gravity="center"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-black"
-        android:text="-The Student-"
-        android:textColor="#464777"
-        android:textSize="55dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="99dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="what do u want to do?"
-        android:textColor="#464777"
-        android:textSize="30dp" />
-
-
+       />
 
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="טיימר לזמן לימוד"
+        android:layout_height="106dp"
+        android:layout_marginTop="110dp"
+        android:background="@android:color/transparent"
+        android:text=" "
+
 
         />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="מחשבון" />
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        >
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="סודוקו לזמן משחק" />
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="131dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:text=""
+
+
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="120dp"
+            android:layout_height="118dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:text="  " />
+
+
+
+</LinearLayout>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="נהג חדש" />
+        android:layout_height="120dp"
+        android:background="@android:color/transparent"
+        android:text="   " />
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    >
+
 
     <Button
-        android:id="@+id/button5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="מוטיבציה :)" />
-
-    <Button
-        android:layout_width="wrap_content"
         android:id="@+id/txtToSpeech"
-        android:layout_height="wrap_content"
-        android:text="הקראת העמוד"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+        android:layout_width="75dp"
+        android:layout_height="94dp"
+        android:layout_marginRight="60dp"
+        android:background="@android:color/transparent"
+        android:gravity="left"
+        android:text=" " />
+
+
 
     <ImageView
-        android:layout_marginTop="50dp"
-        android:id="@+id/kid"
-        android:layout_width="wrap_content"
+        android:id="@+id/logo"
+        android:layout_width="90dp"
         android:layout_height="100dp"
-        android:src="@drawable/kid"
+        android:src="@drawable/logonote"
+        android:layout_marginRight="40dp"
+     />
+
+    <ImageView
+
+        android:id="@+id/kid"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        />
+        android:src="@drawable/kid"
+       />
+</LinearLayout>
+
+
 </LinearLayout>

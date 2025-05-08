@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShiranApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".OdotActivity"
+            android:exported="false" />
         <activity
             android:name=".AnotherQuoteActivity"
             android:exported="false" />
@@ -28,20 +32,26 @@
             </intent-filter>
         </activity> <!-- TimerPage Activity definition -->
         <activity
-            android:name=".TimerPage"
+            android:name=".TimerActivity"
             android:exported="true" />
         <activity
-            android:name=".Calculator"
+            android:name=".CalculatorActivity"
             android:exported="true" />
         <activity
-            android:name=".NewDriver"
+            android:name=".NewDriverActivity"
             android:exported="true" />
+        <activity android:name=".JokesActivity">
+            <!-- אפשר להוסיף תיאור של ה-Activity אם רוצים -->
+        </activity>
         <activity
             android:name=".MotivationActivity"
             android:exported="true" />
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
+        <activity android:name=".ExplnationActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

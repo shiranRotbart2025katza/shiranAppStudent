@@ -1,0 +1,156 @@
+@startuml
+class com.example.shiranapp.DatabaseHelper {
+- {static} String DATABASE_NAME
+- {static} int DATABASE_VERSION
+- {static} String TABLE_USERS
+- {static} String COLUMN_USER_ID
+- {static} String COLUMN_USER_USERNAME
+- {static} String COLUMN_USER_EMAIL
+- {static} String COLUMN_USER_PASSWORD
+- {static} String TABLE_QUOTES
+- {static} String COLUMN_QUOTE_ID
+- {static} String COLUMN_QUOTE_TEXT
+- {static} String COLUMN_QUOTE_USER_ID
++ <<Create>> DatabaseHelper(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ boolean registerUser(String,String,String)
++ boolean checkUser(String,String)
++ String getUsernameByEmail(String)
++ boolean addQuote(String,int)
++ Cursor getAllQuotes()
+}
+
+
+class com.example.shiranapp.RegisterActivity {
+~ EditText username
+~ Button registerButton
+~ DatabaseHelper dbHelper
+# void onCreate(Bundle)
+}
+
+
+class com.example.shiranapp.TimerActivity {
+~ int itest
+- EditText etHours
+- TextView tvCountdown
+- Button btnStartTimer
+- CountDownTimer countDownTimer
+- ImageView androidImage
+# void onCreate(Bundle)
+- void startCountdown(long)
+- String formatTime(long)
+}
+
+
+class com.example.shiranapp.ExplnationActivity {
+# void onCreate(Bundle)
+}
+
+class com.example.shiranapp.NewDriverActivity {
+- DatePicker datePicker
+- TextView tvDaysRemaining
+# void onCreate(Bundle)
+}
+
+
+interface com.example.shiranapp.JokesApiService {
+~ Call<JokesResponse> getJoke()
+}
+
+class com.example.shiranapp.AnotherQuoteActivity {
+- EditText editTextQuote
+- Button buttonSubmit
+# void onCreate(Bundle)
+}
+
+
+class com.example.shiranapp.CalculatorActivity {
+- TextView tvResult
+- StringBuilder currentInput
+- double result
+- String lastOperator
+# void onCreate(Bundle)
+- void calculateResult(String)
+- void resetCalculator()
+}
+
+
+class com.example.shiranapp.MotivationActivity {
+- Button switchButton
+~ TextView myTextView
+~ DatabaseHelper dbHelper
+- int currentCursorPosition
+- Cursor cursor
+~ Context context
+~ ActivityResultLauncher<Intent> someActivityResultLauncher
+# void onCreate(Bundle)
++ void openActivityForResult()
+}
+
+
+class com.example.shiranapp.OdotActivity {
+# void onCreate(Bundle)
+}
+
+class com.example.shiranapp.RetrofitClient {
+- {static} Retrofit retrofit
+- {static} String BASE_URL
++ {static} Retrofit getRetrofitInstance()
++ {static} JokesApiService getApiService()
+}
+
+
+class com.example.shiranapp.MainActivity {
+- ImageView androidImage
+~ Button txtToSpeech
+~ TextToSpeech textToSpeech
+~ TextView welcomeText
+~ SharedPreferences sharedPreferences
+~ DatabaseHelper databaseHelper
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+
+class com.example.shiranapp.JokesResponse {
+- String type
+- String joke
+- String setup
+- String delivery
++ String getJoke()
+}
+
+
+class com.example.shiranapp.JokesActivity {
+- TextView jokeTextView
+# void onCreate(Bundle)
+- void fetchJoke(int)
+- boolean containsBlockedWord(String)
+}
+
+
+class com.example.shiranapp.LoginActivity {
+~ EditText email
+~ Button loginButton
+~ DatabaseHelper dbHelper
+# void onCreate(Bundle)
+}
+
+
+
+
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.shiranapp.DatabaseHelper
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.RegisterActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.TimerActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.ExplnationActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.NewDriverActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.AnotherQuoteActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.CalculatorActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.MotivationActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.OdotActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.JokesActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.shiranapp.LoginActivity
+@enduml

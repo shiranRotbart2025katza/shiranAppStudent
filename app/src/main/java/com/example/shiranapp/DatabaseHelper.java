@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "users.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_USERS = "users";
     private static final String COLUMN_USER_ID = "id";
@@ -53,13 +53,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // פונקציה להוספת משתמש חדש
+    // פונקציה להוספת משתמש חדש עם בדיקת פורמט אימייל ודומיין
     public boolean registerUser(String username, String email, String password) {
+        // בדיקה אם האימייל בפורמט תקני (באמצעות regex)
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (!email.matches(emailPattern)) {
+            return false; // פורמט לא תקני
+        }
+
+        // בדיקה אם הדומיין מתאים (למשל רק gmail.com)
+        if (!email.endsWith("@gmail.com")) {
+            return false; // דומיין לא מאושר
+        }
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_USERNAME, username);
         values.put(COLUMN_USER_EMAIL, email);
-        values.put(COLUMN_USER_PASSWORD, password);  // רצוי להשתמש בהצפנת סיסמאות
+        values.put(COLUMN_USER_PASSWORD, password);
 
         long result = db.insert(TABLE_USERS, null, values);
         db.close();

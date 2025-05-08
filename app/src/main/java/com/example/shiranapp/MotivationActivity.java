@@ -3,11 +3,11 @@ package com.example.shiranapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -18,8 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MotivationActivity extends AppCompatActivity {
 
     private Button switchButton,addButton;
-    private boolean isFirstFragment = true;
-    private boolean isSecondFragment = true;
+    TextView myTextView;
+    DatabaseHelper dbHelper;
+    private int currentCursorPosition = -1;
+    private Cursor cursor;
 
     Context context;
     ActivityResultLauncher<Intent> someActivityResultLauncher;
@@ -27,42 +29,52 @@ public class MotivationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_motivation); // צריך לשים layout חדש אם תרצה
+        setContentView(R.layout.activity_motivation);
 
 
         context=this;
 
+        // Initialize DatabaseHelper
+        dbHelper = new DatabaseHelper(context);
+
+        myTextView = findViewById(R.id.myTextView);
+
+
         switchButton = findViewById(R.id.switchButton);
-        addButton = findViewById(R.id.addButton);
-
-        // הצגת ה-Fragment הראשון בפתיחה
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, new FirstFragment())
-                .commit();
-
         switchButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
+
             public void onClick(View v) {
-                // החלפת ה-Fragment
-                if (isFirstFragment) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragmentContainer, new SecoundFragment())
-                            .commit();
-                } else if (isSecondFragment) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragmentContainer, new ThirdFragment()) // טוען את ה-Fragment השלישי
-                            .commit();
-                    isSecondFragment = false;
+                // Get all quotes from the database
+                cursor = dbHelper.getAllQuotes();
+                if (cursor != null && cursor.getCount() > 0) {
+                    if (currentCursorPosition == -1 || !cursor.moveToPosition(currentCursorPosition)) {
+                        cursor.moveToFirst();
+                        currentCursorPosition = 0;
+                    } else if (!cursor.isLast()) {
+                        boolean moved = cursor.moveToNext();
+                        currentCursorPosition++;
+                    } else {
+                        cursor.moveToFirst();
+                        currentCursorPosition = 0;
+                    }
+
+                    String quote = cursor.getString(1); // עמודה 1 מכילה את המשפטים
+
+                    myTextView.setText(quote);
                 } else {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragmentContainer, new FirstFragment()) // טוען את ה-Fragment הראשון
-                            .commit();
-                    isFirstFragment = true;
+                    myTextView.setText("No quotes available.");
                 }
-                isFirstFragment = !isFirstFragment;
+
             }
         });
 
+
+
+
+        addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,8 +83,6 @@ public class MotivationActivity extends AppCompatActivity {
             }
         });
 
-
-    //Instead of onActivityResult() method use this one
     someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -83,48 +93,55 @@ public class MotivationActivity extends AppCompatActivity {
 
                         Intent data = result.getData();
                         String quote = data.getStringExtra("quote");
+                        int userId = data.getIntExtra("userid",-1);
 
-
-                        Toast.makeText(MotivationActivity.this, quote, Toast.LENGTH_SHORT).show();
-
-
-
-
-
-                        TextView myTextView = findViewById(R.id.myTextView);
-
-                        // יוצרים את הסטרינג שברצונך להציג
-                        String textToDisplay =quote;
-
-                        // מציגים את הסטרינג על ה-TextView
-                        myTextView.setText(textToDisplay);
-
-
-
-
-                        // Initialize DatabaseHelper
-                        DatabaseHelper dbHelper = new DatabaseHelper(context);
-
-                        // Assuming you have a method to get the current user's ID
-                        int userId = data.getIntExtra("userid",-1); // Replace this with your actual method to get user ID
-
-                        // Add the quote to the database
-                        if (dbHelper.addQuote(quote, userId)) {
-                            Toast.makeText(MotivationActivity.this, "Quote added successfully!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MotivationActivity.this, "Failed to add quote.", Toast.LENGTH_SHORT).show();
+                        if (quote != null && !quote.isEmpty() && userId != -1) {
+                            dbHelper.addQuote(quote, userId);
                         }
+
+
                     }
                 }
             });
-        }
+
+        Button goBack = findViewById(R.id.back);
+
+        goBack.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                // יצירת Intent למעבר בין אקטיביטיס
+       finish();
+            }
+        });
+
+
+
+/////
+        Button goToJokes = findViewById(R.id.button6);
+
+        goToJokes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //יצירת Intent למעבר בין אקטיביטיס
+                Intent intent = new Intent(MotivationActivity.this, JokesActivity.class);
+                intent.putExtra("userid",111); //TODOa
+                startActivity(intent);
+            }
+        });
+
+
+
+    }
 
 
     public void openActivityForResult() {
 
-        //Instead of startActivityForResult use this one
         Intent intent = new Intent(this, AnotherQuoteActivity.class);
+        intent.putExtra("userid", getIntent().getIntExtra("userid", -1));
         someActivityResultLauncher.launch(intent);
+
     }
 }
 

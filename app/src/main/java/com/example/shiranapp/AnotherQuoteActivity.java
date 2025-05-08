@@ -20,6 +20,7 @@ public class AnotherQuoteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int userId = getIntent().getIntExtra("userid", -1);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_another_quote);
@@ -36,17 +37,28 @@ public class AnotherQuoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String quote = editTextQuote.getText().toString();
-
-                // Intent להעביר את הנתונים לפעילות הבאה
+                int userId = getIntent().getIntExtra("userid", -1); // קבלת userId
 
                 Intent intent = new Intent();
-                intent.putExtra("quote",quote);
+                intent.putExtra("quote", quote);
+                intent.putExtra("userid", userId);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
 
 
+        Button goBack = findViewById(R.id.back);
+
+        goBack.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick (View v){
+                finish();
+
+            }
+        });
+    }
 
     }
-}

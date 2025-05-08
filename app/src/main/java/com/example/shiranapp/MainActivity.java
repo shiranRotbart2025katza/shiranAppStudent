@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.speech.tts.TextToSpeech;
 import android.widget.ImageView;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button txtToSpeech;
     TextToSpeech textToSpeech;
 
-    TextView greetingTextView;
+    TextView welcomeText;
     SharedPreferences sharedPreferences;
-
 
     DatabaseHelper databaseHelper;
     @Override
@@ -36,12 +34,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+/////////////welcome txt
+        welcomeText = findViewById(R.id.welcomeText);
+
+        // בדיקה אם קיבלנו את שם המשתמש מה-Intent
+        String username = getIntent().getStringExtra("username");
+
+        // אם שם המשתמש לא הגיע דרך ה-Intent, נבדוק ב-SharedPreferences
+        if (username == null) {
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            username = sharedPreferences.getString("username", "משתמש");
+        }
+
+        // הצגת "שלום [שם המשתמש]" על המסך
+        welcomeText.setText("the notebook of: \n" + username );
+    /////////////
+
 
         txtToSpeech = findViewById(R.id.txtToSpeech);
         Button goToTimer = findViewById(R.id.button);
-
-
         androidImage = findViewById(R.id.kid);
+
 
         RotateAnimation rotate = new RotateAnimation(
                 -20, 20,
@@ -61,33 +74,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // יצירת Intent למעבר בין אקטיביטיס
-                Intent intent = new Intent(MainActivity.this, TimerPage.class);
+                Intent intent = new Intent(MainActivity.this, TimerActivity.class);
                 startActivity(intent);
             }
         });
-        Button goToCal = findViewById(R.id.button2);
 
+        Button goToCal = findViewById(R.id.button2);
         goToCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // יצירת Intent למעבר בין אקטיביטיס
-                Intent intent = new Intent(MainActivity.this, Calculator.class);
+                Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
                 startActivity(intent);
             }
         });
-        Button goToNewD = findViewById(R.id.button4);
 
+        Button goToNewD = findViewById(R.id.button4);
         goToNewD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // יצירת Intent למעבר בין אקטיביטיס
-                Intent intent = new Intent(MainActivity.this, NewDriver.class);
+                Intent intent = new Intent(MainActivity.this, NewDriverActivity.class);
                 startActivity(intent);
             }
         });
 
         Button goToMotivation = findViewById(R.id.button5);
-
         goToMotivation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,20 +111,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //מעבר בין טקסט להקראה על ידי הקשר לאפליקציה ומאזין שמופעל בסיום
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+
             @Override
             public void onInit(int i) {
+                //נוודא שהמנוע מוכן לפני שמריצים אותו
 
-                // if No error is found then only it will run
+                // אם לא נמצאו הערות, יופעל
                 if (i != TextToSpeech.ERROR) {
-                    // To Choose language of speech
                     textToSpeech.setLanguage(Locale.UK);
                 }
             }
         });
-        String textS = "welcome to the student, what do you want to do?";
+        String textS = "welcome to the notebook. choose smily face for motivation quotes, choose car for your license update, choose calculator for calculating problems and choose timer for studing while timer running. ";
 
-        // Adding OnClickListener
+        // מאזין שאומר לפונקציה לפעול ולהשמיע את הטקסט
         txtToSpeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,23 +135,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
 
+
+///////////////////תפריט///////
+
+    //יצירת תפריט האפליקציה שלי:
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
+        // -טוען ומקשר את קובץ ה־XML של התפריט לכאן
+        //R.menu.menu_main  שמכיל את הפריטים בתפריט XML
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
+    // טיפול בלחיצה על פריט בתפריט
 public boolean onOptionsItemSelected(MenuItem item)
 {
-    super.onOptionsItemSelected(item);
-    int id = item.getItemId();
+    super.onOptionsItemSelected(item); //עוזר לוודא שיעבוד גם אם לא טיפלנו בכל הדברים האפשריים
+    int id = item.getItemId(); //מחזיר את הID של הפריט שנלחץ
+
     if(id==R.id.action_settings) {
-        Toast.makeText(this, "You selected login", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ExplnationActivity.class);
+        startActivity(intent);
+
     }
+    if(id==R.id.action_odot) {
+        Intent intent = new Intent(this, OdotActivity.class);
+        startActivity(intent);
+    }
+    //הID של הפריטים מגיע מהXML של התפריט
     return true;
     }
+
+
 }
 
 

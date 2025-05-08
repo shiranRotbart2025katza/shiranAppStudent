@@ -25,14 +25,14 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register);//קובע את הXML המתאים
+
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
 
 
 
@@ -43,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         loginRedirectButton = findViewById(R.id.loginRedirectButton);
 
+        //לחיצה על כפתור הרשמה
         registerButton.setOnClickListener(view -> {
             String user = username.getText().toString();
             String mail = email.getText().toString();
@@ -50,8 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (user.isEmpty() || mail.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, "נא למלא את כל השדות", Toast.LENGTH_SHORT).show();
-            } else {
+            } else { //אם לא ריק
+
                 boolean registered = dbHelper.registerUser(user, mail, pass);
+                //הפעולה רושמת משתנה חדש על ידי קבלת הפרמטרים שלו. מחזירה true אם עבר בהצלחה, מחזירה false אם הייתה בעיה למשל אם השם כבר קיים
                 if (registered) {
                     Toast.makeText(this, "נרשמת בהצלחה!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, LoginActivity.class));
@@ -61,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //לחיצה על : כבר יש לי משתמש, נחזור ללוגין
         loginRedirectButton.setOnClickListener(view -> startActivity(new Intent(this, LoginActivity.class)));
     }
 }

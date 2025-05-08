@@ -4,46 +4,71 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
-    tools:context=".MotivationActivity">
+    tools:context=".MotivationActivity"
+    android:orientation="vertical"
+    android:background="@drawable/paper"
+    >
+
+
+    <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="100dp"
+        android:fontFamily="@font/rubik"
+        android:text="smile to the world and the world will smile back to u :)"
+        android:textSize="30dp"
+        android:layout_marginLeft="30dp"
+        />
 
 
 
-    <!-- קונטיינר עבור ה-Fragment -->
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
+    <Button
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"/>
+        android:layout_height="40dp"
+
+        android:text="add quote of yours!"
+        android:layout_gravity="center_horizontal|bottom"
+        android:backgroundTint="#EBB8C1"
+        android:textColor="@color/black"
+
+        />
+
 
     <Button
         android:id="@+id/switchButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="החלף משפט"
-        android:layout_gravity="center_horizontal|bottom"/>
-    <TextView
-        android:id="@+id/myTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="הוסף משפט"
-        android:layout_gravity="center_horizontal|bottom"/>
+        android:layout_height="40dp"
+        android:text="show another quote you added"
+        android:layout_gravity="center_horizontal|bottom"
+        android:backgroundTint="#EBB8C1"
+        android:textColor="@color/black"
+        />
 
-    <TextView
-        android:id="@+id/quoteTextView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:text="הציטוטים יוצגו כאן" />
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#A07E84"
+        android:text="show a random joke" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+      android:layout_height="40dp"
+        android:text="back"
+      android:textColor="@color/black"
+      android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+      android:backgroundTint="#EBB8C1"
+      android:layout_marginBottom="20dp"
+        />
+
+
 
 
 </LinearLayout>
